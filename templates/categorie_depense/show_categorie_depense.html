@@ -1,0 +1,51 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    <title>Afficher les catégories de dépenses</title>
+{% endblock %}
+
+{% block body %}
+    <h3>Tableaux des types de dépenses</h3>
+    <div class="add_container">
+        <div class="add_items">
+            <a href="/categorie-depense/add">Ajouter une catégorie de dépenses</a>
+        </div>
+    </div>
+    <br><br>
+
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th>Id</th>
+            <th>Libellé de categorie</th>
+            <th>Opérations</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% if categoriesDepenses | length >= 1 %}
+            {% for ligne in categoriesDepenses %}
+                <tr>
+                    <td>{{ ligne.id_categorie }}</td>
+                    <td>{{ ligne.libelle_categorie}}</td>
+                    <td>
+                        <div class="add_container">
+                            <div class="add_items">
+                                <a href="/categorie-depense/edit?id_categorie={{ ligne.id_categorie }}">Editer</a>
+                            </div>
+                            <div class="supp_items">
+                                <a href="/categorie-depense/delete1?id_categorie={{ ligne.id_categorie }}" >Supprimer</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td>
+                    pas de catégorie de dépense.
+                </td>
+            </tr>
+        {% endif %}
+        </tbody>
+    </table>
+{% endblock %}

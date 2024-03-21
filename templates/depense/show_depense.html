@@ -1,0 +1,72 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    <title>Afficher les dépenses</title>
+{% endblock %}
+
+{% block body %}
+    <h3>Tableaux des dépenses</h3>
+
+    <div class="add_container">
+        <div class="add_items">
+            <a href="/depense/add">Ajouter une dépense</a>
+        </div>
+    </div>
+    <br><br>
+
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th>Id</th>
+            <th>Destinataire dépense</th>
+            <th>Montant</th>
+            <th>Description</th>
+            <th>Date de dépense</th>
+            <th>Id de catégorie de dépense</th>
+            <th>Image</th>
+            <th>Opérations</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% if depenses | length >= 1 %}
+            {% for ligne in depenses %}
+                <tr>
+                    <td>{{ ligne.id_depense }}</td>
+                    <td>{{ ligne.destinataire_depense }}</td>
+                    <td>{{ ligne.montant }}</td>
+                    <td>{{ ligne.description }}</td>
+                    <td>{{ ligne.date_depense }}</td>
+                    <td>({{ ligne.categorie_id }}) {{ ligne.libelle_categorie }}</td>
+                    <td>{{ ligne.image }}
+                        <br>
+                        {%  if ligne.image is not none %}
+                            <img style="width:40px;height:40px"  src="{{ url_for('static', filename = 'images/' + ligne['image']) }}"  alt="image  de {{ ligne.destinataire_depense }}" >
+                        {% else %}
+                            <img style="width:40px;height:40px"   src="{{ url_for('static', filename='images/no_photo.jpeg')}}"  alt="no image" >
+                        {% endif %}</td>
+                    <td>{{ ligne.operation }}
+                        <div class="add_container">
+                            <div class="add_items">
+                                <a href="/depense/edit?id_depense={{ ligne.id_depense }}">Editer</a>&nbsp;
+                            </div>
+                            <div class="supp_items">
+                                <a href="/depense/delete?id_depense={{ ligne.id_depense }}" >Supprimer</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+
+            {% endfor %}
+
+        {% else %}
+            <tr>
+                <td>
+                    Pas de dépense.
+                </td>
+            </tr>
+        {% endif %}
+
+
+        </tbody>
+    </table>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    <title>Ajouter une catégorie de dépense</title>
+{% endblock %}
+
+{% block body %}
+    {% if error %}
+        <p class=error><strong>Error:</strong> {{ error }}
+    {% endif %}
+    <form method="post" action="/categorie-depense/add" >
+        <fieldset>
+            <legend> Créer une catégorie de dépenses</legend>
+            <label for="libelle_categorie">Libellé de la catégorie</label><br>
+            <input id="libelle_categorie" type="text" name="libelle_categorie" size="18" value="" placeholder="Saisir le libellé de la catégorie de dépense" required><br>
+            <input type="submit" value="Créer" name="Valider" >
+            <input type="button" value="Annuler" onclick="location.href='/categorie-depense/show'">
+        </fieldset>
+    </form>
+{% endblock %}

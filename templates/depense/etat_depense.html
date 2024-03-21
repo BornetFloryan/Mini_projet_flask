@@ -1,0 +1,54 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    <title>modifier une action</title>
+{% endblock %}
+
+{% block body %}
+    <br>
+    {% if error %}
+        <p class=error><strong>Error:</strong> {{ error }}
+    {% endif %}
+    <fieldset>
+        <h3>Affichage d'états</h3>
+        <br>
+        <p class="etat">Depuis le début de Mon Potager, <span style="color : red;">{{ depenses.dep }}</span>
+            actions on été effectuées pour un coût total de
+            <span style="color : red;">{{ depenses.prix }} €</span>.
+        </p>
+    </fieldset>
+    <br>
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th>Id</th>
+            <th>Libelle de la catégorie</th>
+            <th>Nombre de dépenses</th>
+            <th>Montant des dépenses</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        {% if categorie_depenses | length >= 1 %}
+            {% for ligne in categorie_depenses %}
+                <tr>
+                    <td>{{ ligne.id_categorie }}</td>
+                    <td>{{ ligne.libelle_categorie }}</td>
+                    <td>{% if ligne.dep_i  == 0 %}Pas de dépense {% else %} {{ ligne.dep_i }} {% endif %}</td>
+                    <td>{% if ligne.prix_i == None %}0 {% else %} {{ ligne.prix_i }} {% endif %} €</td>
+                </tr>
+
+            {% endfor %}
+
+        {% else %}
+            <tr>
+                <td>
+                    Pas de dépense.
+                </td>
+            </tr>
+        {% endif %}
+
+
+        </tbody>
+    </table>
+{% endblock %}

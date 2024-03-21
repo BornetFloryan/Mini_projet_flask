@@ -1,0 +1,45 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    <title>Ajouter une dépense</title>
+{% endblock %}
+
+{% block body %}
+    <br>
+    {% if error %}
+        <p class=error><strong>Error:</strong> {{ error }}
+    {% endif %}
+    <form method="post" action="/depense/add" >
+        <fieldset>
+            <legend> Créer une dépense</legend>
+            <label for="destinataire_depense">Destinataire de la dépense</label><br>
+            <input id="destinataire_depense" type="text" name="destinataire_depense" size="18" value="" placeholder="Saisir le destinataire de la dépense" required><br>
+            <label>Catégorie de dépense</label><br>
+            <select name="id_categorie" required>
+                <option value="">Sélectionner une catégorie de dépenses</option>
+                {% for ligne in categoriesDepenses %}
+                    <option value="{{ ligne.id_categorie }}"> {{ ligne.libelle_categorie }} </option>
+                {% endfor %}
+            </select>
+            <br>
+            <label for="montant">Montant de la dépense</label>
+            <br>
+            <input id="montant" type="number" name="montant" min="0" value="" step="0.01" placeholder="Saisir le montant de la dépense" required>
+            <br>
+            <label for="description">Description de la dépense</label>
+            <br>
+            <input id="description" type="text" name="description" size="18" value="" placeholder="Saisir la description de la dépense">
+            <br>
+            <label for="date_depense">Date de la dépense</label>
+            <br>
+            <input id="date_depense" type="date" name="date_depense" size="18" value="" required>
+            <br>
+            <label for="image">Image</label>
+            <br>
+            <input id="image" type="file" name="image" size="18" >
+            <br>
+            <input type="submit" value="Créer" name="Valider" >
+            <input type="button" value="Annuler" onclick="location.href='/depense/show'">
+        </fieldset>
+    </form>
+{% endblock %}

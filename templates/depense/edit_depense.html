@@ -1,0 +1,47 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    <title>modifier une dépense</title>
+{% endblock %}
+
+{% block body %}
+    <br>
+    {% if error %}
+        <p class=error><strong>Error:</strong> {{ error }}
+    {% endif %}
+    <form method="post" action="/depense/edit">
+        <fieldset>
+            <legend> Modifier une dépense</legend>
+            <input type="hidden" name="id_depense" value="{{ depense.id_depense }}" id="id_depense">
+            <label for="destinataire_depense">Destinataire de la dépense</label><br>
+            <input type="text" name="destinataire_depense" size="18" value="{{ depense.destinataire_depense }}" id="destinataire_depense" required>
+            <br>
+            <label>Catégorie de dépense
+            <br>
+                <select name="libelle_categorie" required>
+                    <option value="" hidden>Rien</option>
+                    {% for type in categoriesDepenses %}
+                        <option value="{{ type.id_categorie }}"
+                                {% if depense.categorie_id is defined and type.id_categorie == depense.categorie_id %}selected{% endif %}> {{ type.libelle_categorie }} </option>
+                    {% endfor %}
+                </select>
+            </label>
+            <br>
+            <label for="montant">Montant de la dépense</label><br>
+            <input type="number" name="montant" size="18" min="0" step="0.01" value="{{ depense.montant }}" id="montant" required>
+            <br>
+            <label for="description">Description de la dépense</label><br>
+            <input type="text" name="description" size="18" value="{{ depense.description }}" id="description">
+            <br>
+            <label for="date_depense">Date de la dépense</label><br>
+            <input type="date" name="date_depense" size="18" value="{{ depense.date_depense }}" id="date_depense" required>
+            <br>
+            <label for="image">Image</label><br>
+            <input type="text" name="image" value="{{ depense.image }}" id="image">
+            <br>
+            <br>
+            <input type="submit" value="Modifier" name="Modifier" >
+            <input type="button" value="Annuler" onclick="location.href='/depense/show'">
+        </fieldset>
+    </form>
+{% endblock %}

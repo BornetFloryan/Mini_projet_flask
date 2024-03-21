@@ -1,0 +1,22 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    <title>Modifier une catégorie de dépenses</title>
+{% endblock %}
+
+{% block body %}
+    <br>
+    {% if error %}
+        <p class=error><strong>Error:</strong> {{ error }}
+    {% endif %}
+    <form method="post" action="/categorie-depense/edit">
+        <fieldset>
+            <legend> Modifier une catégorie de dépenses</legend>
+            <input type="hidden" name="id_categorie" value="{{ categoriesDepense.id_categorie }}" id="id_categorie">
+            <label for="libelleCategorie">Libellé de la catégorie</label><br>
+            <input type="text" name="libelle_categorie" size="18" value="{{ categoriesDepense.libelle_categorie }}" id="libelle_categorie" required><br>
+            <input type="submit" value="Modifier" name="Modifier" >
+            <input type="button" value="Annuler" onclick="location.href='/categorie-depense/show'">
+        </fieldset>
+    </form>
+{% endblock %}
