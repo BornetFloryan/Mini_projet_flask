@@ -1,6 +1,6 @@
 # Mini Projet Flask - Gestion de Dépenses
 
-Ce dépôt contient le code source d'un mini projet réalisé avec Flask pour la gestion de dépenses.\n
+Ce dépôt contient le code source d'un mini projet réalisé avec Flask pour la gestion de dépenses.  
 [Liens pythonanywhere](https://floryan.pythonanywhere.com/)
 
 ## Description
