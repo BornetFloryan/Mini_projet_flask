@@ -1,7 +1,3 @@
-Voici un exemple de README pour votre dépôt Git :
-
----
-
 # Mini Projet Flask
 
 Ce dépôt contient le code source d'un mini projet réalisé avec Flask.
